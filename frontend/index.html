@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Progress Monitor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div id="auth-container" class="container">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>📚 Learning Progress Monitor</h1>
+                    <p>Track your educational journey</p>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-form" class="auth-form active">
+                    <h2>Welcome Back</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-role">I am a:</label>
+                            <select id="login-role" required>
+                                <option value="">Select role</option>
+                                <option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                    <p class="auth-toggle">Don't have an account? <a href="#" onclick="toggleAuth()">Register here</a></p>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="auth-form">
+                    <h2>Create Account</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="register-email">Email Address</label>
+                            <input type="email" id="register-email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-role">Join as:</label>
+                            <select id="register-role" required>
+                                <option value="">Select role</option>
+                                <option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    </form>
+                    <p class="auth-toggle">Already have an account? <a href="#" onclick="toggleAuth()">Login here</a></p>
+                </div>
+
+                <div id="auth-message" class="message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container" class="app-container hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">📚 Learning Progress</div>
+                <div class="header-right">
+                    <span id="user-email" class="user-info"></span>
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showStudentDashboard()" class="nav-link active" data-page="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </a></li>
+                <li><a href="#" onclick="showCourses()" class="nav-link" data-page="courses">
+                    <span class="icon">📖</span> Courses
+                </a></li>
+                <li><a href="#" onclick="showProgress()" class="nav-link" data-page="progress">
+                    <span class="icon">📈</span> My Progress
+                </a></li>
+                <li id="admin-nav" class="hidden"><a href="#" onclick="showAdminDashboard()" class="nav-link" data-page="admin">
+                    <span class="icon">⚙️</span> Admin Panel
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard-page" class="page active">
+                <div class="page-header">
+                    <h2>Welcome to Your Dashboard</h2>
+                    <p>Here's your learning overview</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <h3>Total Topics</h3>
+                        <p class="stat-value" id="total-topics">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <h3>Completed</h3>
+                        <p class="stat-value" id="completed-topics">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <h3>Progress</h3>
+                        <p class="stat-value" id="progress-percent">0%</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <h3>Enrolled Courses</h3>
+                        <p class="stat-value" id="enrolled-count">0</p>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3>Overall Progress</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-bar-overall"></div>
+                    </div>
+                    <p id="progress-text" class="progress-text">0/0 topics completed</p>
+                </div>
+            </div>
+
+            <!-- Courses Page -->
+            <div id="courses-page" class="page">
+                <div class="page-header">
+                    <h2>Available Courses</h2>
+                    <p>Explore and enroll in courses</p>
+                </div>
+
+                <div id="courses-list" class="courses-grid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Progress Page -->
+            <div id="progress-page" class="page">
+                <div class="page-header">
+                    <h2>Your Learning Path</h2>
+                    <p>Track your progress through each course</p>
+                </div>
+
+                <div id="progress-view" class="progress-view">
+                    <!-- Course structure populated here -->
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="admin-page" class="page">
+                <div class="page-header">
+                    <h2>Admin Dashboard</h2>
+                    <p>Manage the learning system</p>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="admin-card">
+                        <h3>📊 System Statistics</h3>
+                        <div class="stat-mini">
+                            <p>Total Users: <strong id="admin-users">0</strong></p>
+                            <p>Total Courses: <strong id="admin-courses">0</strong></p>
+                            <p>Total Topics: <strong id="admin-topics">0</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <h3>🎓 Student Performance</h3>
+                        <div id="admin-performance" class="performance-list">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Course Details -->
+    <div id="course-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCourseModal()">&times;</button>
+            <h2 id="modal-course-title"></h2>
+            <p id="modal-course-desc" class="modal-description"></p>
+            
+            <div id="subjects-container" class="subjects-list">
+                <!-- Subjects and topics loaded here -->
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeCourseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="spinner hidden">
+        <div class="spinner-ring"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

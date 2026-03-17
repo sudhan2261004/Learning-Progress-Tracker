@@ -1,0 +1,1 @@
+SECRET_KEY = "learning-progress-monitor-super-secret-key-2026"

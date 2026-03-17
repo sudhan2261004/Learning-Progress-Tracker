@@ -1,0 +1,17 @@
+.card{
+background:white;
+padding:20px;
+margin:15px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.enrolled{
+color:green;
+font-weight:bold;
+}
+
+.done{
+color:green;
+font-weight:bold;
+}
