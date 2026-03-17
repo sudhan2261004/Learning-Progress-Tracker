@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from auth import auth_bp
 from admin_route import admin_bp
@@ -17,4 +19,5 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port=os.getenv("PORT", 5000)
+    app.run(host='0.0.0.0', port=port, debug=True)
