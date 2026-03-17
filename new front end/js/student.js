@@ -1,4 +1,4 @@
-const API = "http://localhost:5000";
+const API = "https://learning-progress-tracker-gova-backend.onrender.com";
 
 function getToken(){
 return localStorage.getItem("token");

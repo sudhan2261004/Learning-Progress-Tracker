@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://learning-progress-tracker-gova-backend.onrender.com";
 
 function getToken() {
     return localStorage.getItem("token");

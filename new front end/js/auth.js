@@ -3,7 +3,7 @@ async function login(){
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
-const res = await fetch("http://localhost:5000/auth/login",{
+const res = await fetch("https://learning-progress-tracker-gova-backend.onrender.com/auth/login",{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
