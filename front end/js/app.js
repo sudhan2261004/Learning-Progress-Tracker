@@ -19,7 +19,7 @@ body:JSON.stringify({email,password})
 
 alert("Registered")
 
-window.location="login.html"
+window.location="index.html"
 
 }
 
@@ -55,7 +55,7 @@ function logout(){
 
 localStorage.removeItem("token")
 
-window.location="login.html"
+window.location="index.html"
 
 }
 

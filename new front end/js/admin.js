@@ -30,7 +30,7 @@ localStorage.removeItem("role");
 
 alert("Logged out successfully");
 
-window.location.href = "login.html";
+window.location.href = "index.html";
 
 }
 
@@ -42,7 +42,7 @@ const role = localStorage.getItem("role");
 
 if(!token || role !== "admin"){
 alert("Unauthorized Access");
-window.location.href="login.html";
+window.location.href="index.html";
 return;
 }
 
