@@ -455,7 +455,7 @@
                 </div>
                 <div class="form-group">
                     <label for="courseId">Course ID</label>
-                    <input id="courseId" type="text" placeholder="Enter course ID">
+                    <select id="courseDropdown" onchange="onCourseChange()"></select>
                 </div>
                 <div class="button-group">
                     <button class="btn-create" onclick="createSubject()">Create Subject</button>
@@ -489,7 +489,7 @@
                 </div>
                 <div class="form-group">
                     <label for="topicSubjectId">Subject ID</label>
-                    <input id="topicSubjectId" type="text" placeholder="Enter subject ID">
+                    <select id="subjectDropdown"></select>
                 </div>
                 <div class="button-group">
                     <button class="btn-create" onclick="createTopic()">Create Topic</button>

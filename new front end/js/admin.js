@@ -48,6 +48,7 @@ return;
 
 loadCourses();
 loadSubjects();
+loadCourseDropdown();
 loadTopics();
 
 }
@@ -153,7 +154,7 @@ async function createSubject(){
 
 const name = document.getElementById("subjectName").value;
 const description = document.getElementById("subjectDesc").value;
-const course_id = document.getElementById("courseId").value;
+const course_id = document.getElementById("courseDropdown").value;
 
 await fetch(API+"/admin/subjects",{
 method:"POST",
@@ -166,7 +167,6 @@ alert("Subject Created");
 loadSubjects();
 
 }
-
 
 async function loadSubjects(){
 
@@ -246,7 +246,7 @@ loadSubjects();
 async function createTopic(){
 
 const title = document.getElementById("topicTitle").value;
-const subject_id = document.getElementById("topicSubjectId").value;
+const subject_id = document.getElementById("subjectDropdown").value;
 
 await fetch(API+"/admin/topics",{
 method:"POST",
@@ -259,7 +259,6 @@ alert("Topic Created");
 loadTopics();
 
 }
-
 
 async function loadTopics(){
 
@@ -325,5 +324,51 @@ headers:headers()
 alert("Topic Deleted");
 
 loadTopics();
+
+}
+
+async function loadCourseDropdown(){
+
+const res = await fetch(API+"/admin/courses",{
+headers:headers()
+});
+
+const courses = await res.json();
+
+let options = "<option value=''>Select Course</option>";
+
+courses.forEach(c=>{
+options += `<option value="${c.id}">${c.name}</option>`;
+});
+
+document.getElementById("courseDropdown").innerHTML = options;
+
+}
+
+async function loadSubjectDropdown(course_id){
+
+const res = await fetch(API+"/admin/subjects",{
+headers:headers()
+});
+
+const subjects = await res.json();
+
+let options = "<option value=''>Select Subject</option>";
+
+subjects
+.filter(s => s.course_id == course_id) // 🔥 FILTER
+.forEach(s=>{
+options += `<option value="${s.id}">${s.name}</option>`;
+});
+
+document.getElementById("subjectDropdown").innerHTML = options;
+
+}
+
+function onCourseChange(){
+
+const course_id = document.getElementById("courseDropdown").value;
+
+loadSubjectDropdown(course_id);
 
 }

@@ -173,7 +173,7 @@ def get_subjects():
     cur,conn = get_cursor()
 
     cur.execute("""
-    SELECT s.id,s.name,s.description,c.name
+    SELECT s.id,s.name,s.description,s.course_id,c.name
     FROM subjects s
     JOIN courses c
     ON s.course_id=c.id
@@ -188,7 +188,8 @@ def get_subjects():
             "id":s[0],
             "name":s[1],
             "description":s[2],
-            "course_name":s[3]
+            "course_id":s[3],   # ✅ ADD THIS
+            "course_name":s[4]
         })
 
     cur.close()
